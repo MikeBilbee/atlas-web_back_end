@@ -1,0 +1,1 @@
+<h1> Atlas T3 Full Stack: ES6 Classes </h1>
