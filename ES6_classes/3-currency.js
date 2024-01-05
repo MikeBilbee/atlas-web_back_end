@@ -30,7 +30,7 @@ export default class Currency {
     if (typeof nName !== 'string') {
       throw new TypeError('Name must be a string');
     }
-    this._name = nName
+    this._name = nName;
   }
 
   displayFullCurrency() {
