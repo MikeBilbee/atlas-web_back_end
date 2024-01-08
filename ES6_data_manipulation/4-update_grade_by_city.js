@@ -3,10 +3,10 @@ export default function updateStudentGradeByCity(students, city, newGrades) {
     return 0;
   }
 
-  const filterStudents = students.filter(student => student.location === city);
-  const gradeMap = new Map(newGrades.map(grade => [grade.studentId, grade.grade]));
-  return filterStudents.map(student => ({
+  const filterStudents = students.filter((student) => student.location === city);
+  const gradeMap = new Map(newGrades.map((grade) => [grade.studentId, grade.grade]));
+  return filterStudents.map((student) => ({
     ...student,
-    grade: gradeMap.get(student.id) || "N/A"
+    grade: gradeMap.get(student.id) || 'N/A',
   }));
 }
