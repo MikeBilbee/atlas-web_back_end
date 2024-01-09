@@ -1,9 +1,9 @@
 <h1> Atlas T3: ES6 Data Manipulation </h1>
 
 This Project covers:
-* | + | - How to use map, filter and reduce on arrays
-* | + | - Typed arrays
-* | + | - The Set, Map, and Weak link data structures
+*  How to use map, filter and reduce on arrays
+*  Typed arrays
+*  The Set, Map, and Weak link data structures
 ---
 <h3> Repository Contents </h3>
 
