@@ -9,8 +9,8 @@ This Project covers:
 
 | Task | File | Description |
 | ----- | ----- | ----- |
-| 0. Basic list of objects | [0-get_list_students.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/0-get_list_students.js) | A function that returns an array of ids from a list of object. |
-| 1. More mapping | [1-get_list_student_ids.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/1-get_list_student_ids.js) | A function that returns an array of ids from a list of object. |
+| 0. Basic list of objects | [0-get_list_students.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/0-get_list_students.js) | A function that returns an array of ids from a list of objects. |
+| 1. More mapping | [1-get_list_student_ids.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/1-get_list_student_ids.js) | A function that returns an array of ids from a list of objects. |
 | 2. Filter | [2-get_students_by_loc.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/2-get_students_by_loc.js) | A function that returns an array of objects who are located in a specific city. |
 | 3. Reduce | [3-get_ids_sum.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/3-get_ids_sum.js) | A function that returns the sum of all the student ids. |
 | 4. Combine | [4-update_grade_by_city.js](https://github.com/MikeBilbee/atlas-web_back_end/blob/main/ES6_data_manipulation/4-update_grade_by_city.js) | A function that returns an array of students for a specific city with their new grade. |
