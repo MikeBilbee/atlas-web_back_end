@@ -7,7 +7,13 @@ export default async function handleProfileSignup(firstName, lastName, fileName)
       signUpUser(firstName, lastName),
       uploadPhoto(fileName),
     ])
-      .then(async (myStatus) => ({ status: 'fulfilled', value: myStatus }))
-      .catch((error) => ({ status: 'rejected', value: error.toString() })),
+      .then(async (myStatus) => ({
+        status: 'fulfilled',
+        value: myStatus,
+      }))
+      .catch((error) => ({
+        status: 'rejected',
+        value: error.toString(),
+      })),
   ];
 }
