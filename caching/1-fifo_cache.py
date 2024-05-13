@@ -26,7 +26,7 @@ class FIFOCache(BaseCaching):
                     delete = list(self.cache_data.keys())[0]
                     del self.cache_data[delete]
                     print("DISCARD: {}".format(delete))
-                    
+
             self.cache_data[key] = item
 
     def get(self, key):
