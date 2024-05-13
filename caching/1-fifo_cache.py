@@ -12,9 +12,13 @@ class FIFOCache(BaseCaching):
     """
 
     def __init__(self):
+        """ Initialize """
+
         super().__init__()
 
     def put(self, key, item):
+
+        """Adding/Removing Cache data """
         if key or item is not None:
             mycache = self.get(key)
             if mycache is None:
