@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-""" BaseCaching module
+"""
+    A class LIFOCache that inherits from BaseCaching and is a
+    caching system: You must use self.cache_data - dictionary from the
+    parent class BaseCaching
 """
 from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """
-    A class LIFOCache that inherits from BaseCaching and is a
-    caching system: You must use self.cache_data - dictionary from the
-    parent class BaseCaching
-    """
+    """A basic LIFO caching system"""
     def __init__(self):
         """initialize"""
 
