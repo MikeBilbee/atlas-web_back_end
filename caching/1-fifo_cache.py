@@ -18,19 +18,16 @@ class FIFOCache(BaseCaching):
 
     def put(self, key, item):
         """Adding/Removing Cache data """
-        
-        if key or item is None:
-            pass
+
         if key or item is not None:
             mycache = self.get(key)
             if mycache is None:
-                if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                if len(self.cache_data) == BaseCaching.MAX_ITEMS:
                     delete = list(self.cache_data.keys())[0]
                     del self.cache_data[delete]
                     print("DISCARD: {}".format(delete))
                     
             self.cache_data[key] = item
-
 
     def get(self, key):
         """
