@@ -7,11 +7,13 @@ from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
+
     """
     A basic cache system
     """
 
     def put(self, key, item):
+
         """
         Adds an item to the cache.
 
@@ -23,6 +25,7 @@ class BasicCache(BaseCaching):
             self.cache_data[key] = item
 
     def get(self, key):
+
         """
         Retrieves an item from the cache.
 
@@ -32,4 +35,5 @@ class BasicCache(BaseCaching):
         Returns:
             The cached item, or None if the key doesn't exist.
         """
+        
         return self.cache_data.get(key, None)
