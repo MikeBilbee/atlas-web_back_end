@@ -25,6 +25,6 @@ def index_range(page, page_size):
 
     start_index = (page - 1) * page_size  # Calculate the start index
     end_index = start_index + page_size   # Calculate the end index
-    index_range = (start_index, end_index) # Tuple of indeces
+    index_range = (start_index, end_index)  # Tuple of indeces
 
     return index_range
