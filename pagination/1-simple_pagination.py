@@ -43,7 +43,7 @@ class Server:
         """Gets page number"""
 
         assert type(page) == int and page > 0
-        assert type(page_size) == int and page_size > 0 
+        assert type(page_size) == int and page_size > 0
 
         page, page_size = index_range(page, page_size)
         try:
