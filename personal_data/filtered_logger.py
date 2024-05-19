@@ -25,6 +25,7 @@ def filter_datum(fields: List[str],
     regex = f'({"|".join(fields)})=([^{separator}]*)'
     return re.sub(regex, fr'\1={redaction}', message)
 
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
