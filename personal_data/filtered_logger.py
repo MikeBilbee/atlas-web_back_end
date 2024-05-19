@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
 """
-A function called filter_datum that returns the log message obfuscated:
-
-Arguments:
-    fields: a list of strings representing all fields to obfuscate
-    redaction: a string representing by what the field will be obfuscated
-    message: a string representing the log line
-    separator: a string representing by which character is separating
-        all fields in the log line (message)
+An obfuscating logging system
 """
 
 import re
 import logging
 from typing import List
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 def filter_datum(fields: List[str],
@@ -45,3 +39,26 @@ class RedactingFormatter(logging.Formatter):
             self.fields, self.REDACTION, record.msg, self.SEPARATOR
         )
         return super().format(record)
+
+
+def get_logger() -> logging.Logger:
+    """Creates a log of user data"""
+
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    handler = logging.StreamHandler()
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.addHandler(handler)
+
+    return logger
+
+
+def main():
+    """
+
+    """
+
+
+if __name__ == "__main__":
+    main()
