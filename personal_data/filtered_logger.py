@@ -5,6 +5,8 @@ An obfuscating logging system
 
 import re
 import logging
+import os
+import mysql.connector
 from typing import List
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
@@ -52,6 +54,16 @@ def get_logger() -> logging.Logger:
     logger.addHandler(handler)
 
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Connects to the Holberton database and returns a connection object."""
+    return mysql.connector.connect(
+        host=os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=os.environ.get('PERSONAL_DATA_DB_NAME', 'root'),
+        user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
+        password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
+        )
 
 
 def main():
