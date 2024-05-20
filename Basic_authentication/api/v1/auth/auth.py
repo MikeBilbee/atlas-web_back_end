@@ -13,7 +13,10 @@ class Auth:
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Checks for required authorization"""
 
-        return False
+        if not path or not excluded_paths:
+            return True
+
+        return path.rstrip('/') not in {p.rstrip('/') for p in excluded_paths} 
 
     def authorization_header(self, request=None) -> str:
         """Retrieves auth header"""
