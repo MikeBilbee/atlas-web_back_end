@@ -67,9 +67,16 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main():
-    """
+    """Obtains Database connection"""
 
-    """
+    logger = get_logger
+    with get_db() as conn, conn.cursor(dictionary=True) as cursor:
+        cursor.execute("SELECT * FROM users")
+        for row in cursor:
+            filtered_row = "; ".join(f"{k}={RedactingFormatter.REDACTION if
+                                            k in PII_FIELDS else v}" for k,
+                                            v in row.items())  # noqa: E128
+            logger.info(filtered_row)
 
 
 if __name__ == "__main__":
