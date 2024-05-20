@@ -31,6 +31,6 @@ def stats() -> str:
 def unauthorized() -> str:
     """ GET /api/v1/unauthorized
     Return:
-        - An error!
+        N/A
     """
     abort(401)
