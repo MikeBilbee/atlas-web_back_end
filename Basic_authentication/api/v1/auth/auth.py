@@ -29,6 +29,3 @@ class Auth:
         """Gets current user"""
 
         return None
-
-
-
