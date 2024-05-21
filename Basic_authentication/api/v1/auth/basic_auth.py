@@ -22,11 +22,10 @@ class BasicAuth(Auth):
 
         return authorization_header[6:]
 
-
-    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
+    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:  # noqa E501
         """Returns the decoded value of a Base64 string"""
 
-        if base64_authorization_header is None or not isinstance(base64_authorization_header, str):
+        if base64_authorization_header is None or not isinstance(base64_authorization_header, str):  # noqa E501
             return None
 
         try:
