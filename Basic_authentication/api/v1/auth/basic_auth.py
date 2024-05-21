@@ -50,7 +50,7 @@ class BasicAuth(Auth):
         user_email, user_password = decoded_base64_authorization_header.split(':', 1)  # noqa E501
         return user_email, user_password
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):  # noqa E501
         """Creates User instance based on his email and password."""
 
         if not user_email or not isinstance(user_email, str):
