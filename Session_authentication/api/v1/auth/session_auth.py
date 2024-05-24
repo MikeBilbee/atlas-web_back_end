@@ -33,3 +33,8 @@ class SessionAuth(Auth):
         user_id = SessionAuth.user_id_by_session_id.get(session_id)
 
         return user_id
+
+    def session_cookie(self, request=None):
+        """Returns Cookie value"""
+
+        
