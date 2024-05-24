@@ -10,4 +10,3 @@ class SessionAuth(Auth):
     """Session Athentication class, inheriting from Auth"""
 
     pass
-
