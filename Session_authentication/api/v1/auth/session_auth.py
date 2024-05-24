@@ -3,8 +3,9 @@
 WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 """
 
-import uuid
 from api.v1.auth.auth import Auth
+from models.user import User
+import uuid
 
 
 class SessionAuth(Auth):
@@ -37,4 +38,10 @@ class SessionAuth(Auth):
     def session_cookie(self, request=None):
         """Returns Cookie value"""
 
-        
+    def current_user(self, request=None):
+        """returns User instance based on cookie value"""
+        cookie_value = self.session_cookie(request)
+        if cookie_value is None:
+            return None
+        user = self.user_id_for_session_id(cookie_value)
+        return User.get(user)
