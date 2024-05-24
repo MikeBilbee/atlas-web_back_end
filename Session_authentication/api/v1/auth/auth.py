@@ -32,6 +32,7 @@ class Auth:
         return None
     
     def session_cookie(self, request=None):
+        """Validates session cookie"""
         if request is None:
             return None
 
