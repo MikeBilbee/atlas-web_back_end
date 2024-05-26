@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-An obfuscating logging system
+A function called filter_datum that returns the log message obfuscated:
+Arguments:
+    fields: a list of strings representing all fields to obfuscate
+    redaction: a string representing by what the field will be obfuscated
+    message: a string representing the log line
+    separator: a string representing by which character is separating
+        all fields in the log line (message)
 """
 
 import re
-import logging
-import os
-import mysql.connector
 from typing import List
-PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 def filter_datum(fields: List[str],
@@ -20,64 +22,3 @@ def filter_datum(fields: List[str],
 
     regex = f'({"|".join(fields)})=([^{separator}]*)'
     return re.sub(regex, fr'\1={redaction}', message)
-
-
-class RedactingFormatter(logging.Formatter):
-    """ Redacting Formatter class
-        """
-
-    REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
-    SEPARATOR = ";"
-
-    def __init__(self, fields: List[str]):
-        """Initializes the class RedactingFormatter"""
-        super().__init__(self.FORMAT)
-        self.fields = fields
-
-    def format(self, record: logging.LogRecord) -> str:
-        """Formats the log and returns redacted data"""
-        record.msg = filter_datum(
-            self.fields, self.REDACTION, record.msg, self.SEPARATOR
-        )
-        return super().format(record)
-
-
-def get_logger() -> logging.Logger:
-    """Creates a log of user data"""
-
-    logger = logging.getLogger("user_data")
-    logger.setLevel(logging.INFO)
-    logger.propagate = False
-    handler = logging.StreamHandler()
-    handler.setFormatter(RedactingFormatter(PII_FIELDS))
-    logger.addHandler(handler)
-
-    return logger
-
-
-def get_db() -> mysql.connector.connection.MySQLConnection:
-    """Connects to the Holberton database and returns a connection object."""
-    return mysql.connector.connect(
-        host=os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost'),
-        database=os.environ.get('PERSONAL_DATA_DB_NAME', 'root'),
-        user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
-        password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
-        )
-
-
-def main():
-    """Obtains Database connection"""
-
-    logger = get_logger
-    with get_db() as conn, conn.cursor(dictionary=True) as cursor:
-        cursor.execute("SELECT * FROM users")
-        for row in cursor:
-            filtered_row = "; ".join(f"{k}={RedactingFormatter.REDACTION if
-                                            k in PII_FIELDS else v}" for k,
-                                            v in row.items())  # noqa: E128
-            logger.info(filtered_row)
-
-
-if __name__ == "__main__":
-    main()
