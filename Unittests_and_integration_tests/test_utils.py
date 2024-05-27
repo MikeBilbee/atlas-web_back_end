@@ -4,7 +4,7 @@ Test Suite for Utils, Client, & Fixtures
 """
 
 import unittest
-import parameterized
+from parameterized import parameterized
 from utils import access_nested_map
 from typing import Mapping, Sequence, Any
 
