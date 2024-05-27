@@ -6,7 +6,7 @@ Test Suite for Utils, Client, & Fixtures
 import unittest
 from unittest.mock import patch
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from typing import Mapping, Sequence, Any, Dict, Callable
 
 
@@ -59,6 +59,32 @@ class TestGetJson(unittest.TestCase):
         output = get_json(test_url)
         get_mock.assert_called_once_with(test_url)
         self.assertEqual(output, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """Test class for Memoize"""
+
+    def test_memoize(self):
+        """Test for Memoize"""
+
+        class TestClass:
+            """Test class"""
+
+            def a_method(self):
+                """A test method"""
+                return 42
+
+        @memoize
+        def a_property(self):
+            """A test property"""
+
+            return self.a_method()
+
+        with patch.object(TestClass, 'a_method') as mock:
+            test = TestClass()
+            test.a_property
+            test.a_property
+            mock.assert_called_once()
 
 
 if __name__ == '__main__':
