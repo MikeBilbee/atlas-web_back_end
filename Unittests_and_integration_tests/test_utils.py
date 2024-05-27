@@ -5,8 +5,8 @@ Test Suite for Utils, Client, & Fixtures
 
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map
-from typing import Mapping, Sequence, Any
+from utils import access_nested_map, get_json
+from typing import Mapping, Sequence, Any, Dict, Callable
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -39,6 +39,25 @@ class TestAccessNestedMap(unittest.TestCase):
             access_nested_map(nested_map, path)
 
         self.assertEqual(context.exception.args[0], expected)
+
+
+class TestGetJson(unittest.TestCase):
+    """Test class for GetJson"""
+
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    def test_get_json(self,
+                      test_url: str,
+                      test_payload: Dict,
+                      get_mock: Callable):
+        """Test for GetJason"""
+        get_mock.return_value.json.return_value = test_payload
+        output = get_json(test_url)
+        get_mock.assert_called_once_with(test_url)
+        self.assertEqual(output, test_payload)
+
 
 if __name__ == '__main__':
     unittest.main()
