@@ -4,6 +4,7 @@ Test Suite for Utils, Client, & Fixtures
 """
 
 import unittest
+from unittest.mock import patch
 from parameterized import parameterized
 from utils import access_nested_map, get_json
 from typing import Mapping, Sequence, Any, Dict, Callable
@@ -48,6 +49,7 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
+    @patch('requests.get')
     def test_get_json(self,
                       test_url: str,
                       test_payload: Dict,
