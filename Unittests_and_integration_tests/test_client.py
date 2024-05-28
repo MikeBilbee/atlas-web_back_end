@@ -16,16 +16,15 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc")
     ])
     @patch('client.get_json')
-    def test_org(self, org_name: Callable):
+    def test_org(self, org_name, mock_get_json):
         """Test for GithubOrgClient"""
 
-        client = GithubOrgClient(org_name)
+        test_client = GithubOrgClient(org_name)
 
-        first_response = client.org
+        test_client.org()
 
-        second_response = client.org
-
-        self.assertIs(first_response, second_response) 
+        mock_get_json.assert_called_once_with(
+            f"https://api.github.com/orgs/{org_name}")
 
 if __name__ == '__main__':
     unittest.main()
