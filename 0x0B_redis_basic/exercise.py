@@ -5,7 +5,7 @@ An excercise in learning Redis and using it as a Caching system
 
 import redis
 import uuid
-from typing import Union
+from typing import Union, Optional, Callable
 
 
 class Cache():
@@ -21,9 +21,31 @@ class Cache():
         """Stores Data and returns it as a string"""
 
         key = str(uuid.uuid4())
-
-        if isinstance(data, (int, float)):
-            data = str(data)
-
         self._redis.set(key, data)
+
         return key
+
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+        """Returns value stored at Key"""
+
+        data = self._redis.get(key)
+
+        if fn:
+            return fn(data)
+
+        return data
+
+    def get_str(self, key: str) -> str:
+        """Parametrizes Cache.get to str"""
+
+        data = self._redis.get(key)
+
+        return data.decode("utf-8")
+
+    def get_int(self, key: str) -> int:
+        """Parametrize Cache.get to int"""
+
+        data = self._redis.get(key)
+
+        return int(data)
