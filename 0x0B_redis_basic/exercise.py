@@ -6,7 +6,21 @@ An excercise in learning Redis and using it as a Caching system
 import redis
 import uuid
 from typing import Union, Optional, Callable
+from functools import wraps
 
+def count_calls(method: Callable) -> Callable:
+    """Decorator that takes a method and returns a callable object"""
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs) -> method:
+        """A wrapper for our decorator"""
+
+        key = method.__qualname__  
+        self._redis.incr(key) 
+
+        return method(self, *args, **kwargs)
+    
+    return wrapper
 
 class Cache():
     """A Caching Class using Redis"""
@@ -17,6 +31,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Stores Data and returns it as a string"""
 
