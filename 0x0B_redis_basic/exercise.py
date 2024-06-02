@@ -96,16 +96,12 @@ class Cache():
 def replay(method: Callable) -> None:
     """Displays the call history of a function."""
 
-    cache = method.__qualname__
-    input_key = method.__qualname__ + ":inputs"
-    output_key = method.__qualname__ + ":outputs"
+    redi = redis.Redis()
+    qual_Name = method.__qualname__
+    inputs = redi.lrange(f"{qual_Name}:inputs", 0, -1)
+    outputs = redi.lrange(f"{qual_Name}:outputs", 0, -1)
 
-    print("{} was called {} times:".format(cache, len(inputs)))
+    print("{} was called {} times:".format(qual_Name, len(inputs)))
 
-    inputs = cache._redis.lrange(input_key, 0, -1)
-    outputs = cache._redis.lrange(output_key, 0, -1)
-
-    for inp, outp in zip(inputs, outputs):
-        inp = inp.decode('utf-8') if isinstance(inp, bytes) else inp
-        outp = outp.decode('utf-8') if isinstance(outp, bytes) else outp
-        print(f"{method.__qualname__}(*{eval(inp)}) -> {outp}")
+    for i, o in zip(inputs, outputs):
+        print(f"{qual_Name}(*{(i).decode('utf-8')}) -> {(o).decode('utf-8')}")
