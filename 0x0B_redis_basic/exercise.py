@@ -10,7 +10,10 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
-    """Decorator that takes a method and returns a callable object"""
+    """
+    Decorator that records and returns how many
+    times the decorated method is called
+    """
 
     @wraps(method)
     def wrapper(self, *args, **kwargs) -> method:
@@ -20,6 +23,27 @@ def count_calls(method: Callable) -> Callable:
         self._redis.incr(key)
 
         return method(self, *args, **kwargs)
+
+    return wrapper
+
+
+def call_history(method: Callable) -> Callable:
+    """
+    Decorator that stores and returns input
+    and output for the decorated method
+    """
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """Wrapper for our decorator"""
+
+        input_key = method.__qualname__ + ":inputs"
+        output_key = method.__qualname__ + ":outputs"
+        self._redis.rpush(input_key, str(args))
+        result = method(self, *args, **kwargs)
+        self._redis.rpush(output_key, str(result))
+
+        return result
 
     return wrapper
 
@@ -34,6 +58,7 @@ class Cache():
         self._redis.flushdb()
 
     @count_calls
+    @call_history
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Stores Data and returns it as a string"""
 
