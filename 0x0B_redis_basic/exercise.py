@@ -8,6 +8,7 @@ import uuid
 from typing import Union, Optional, Callable
 from functools import wraps
 
+
 def count_calls(method: Callable) -> Callable:
     """Decorator that takes a method and returns a callable object"""
 
@@ -15,12 +16,13 @@ def count_calls(method: Callable) -> Callable:
     def wrapper(self, *args, **kwargs) -> method:
         """A wrapper for our decorator"""
 
-        key = method.__qualname__  
-        self._redis.incr(key) 
+        key = method.__qualname__
+        self._redis.incr(key)
 
         return method(self, *args, **kwargs)
-    
+
     return wrapper
+
 
 class Cache():
     """A Caching Class using Redis"""
