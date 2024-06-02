@@ -93,20 +93,20 @@ class Cache():
         return int(data)
 
 
-def replay(method: Callable, cache: Cache) -> None:
-    """Displays the call history of a function."""
+def replay(self, method: Callable) -> None:
+        """Displays the call history of a function."""
 
-    input_key = method.__qualname__ + ":inputs"
-    output_key = method.__qualname__ + ":outputs"
+        input_key = method.__qualname__ + ":inputs"
+        output_key = method.__qualname__ + ":outputs"
 
-    call_count = int(cache._redis.get(method.__qualname__) or 0)
+        call_count = int(self._redis.get(method.__qualname__) or 0)
 
-    print(f"{method.__qualname__} was called {call_count} times:")
+        print(f"{method.__qualname__} was called {call_count} times:")
 
-    inputs = cache._redis.lrange(input_key, 0, -1)
-    outputs = cache._redis.lrange(output_key, 0, -1)
+        inputs = self._redis.lrange(input_key, 0, -1)
+        outputs = self._redis.lrange(output_key, 0, -1)
 
-    for inp, outp in zip(inputs, outputs):
-        inp = inp.decode('utf-8') if isinstance(inp, bytes) else inp
-        outp = outp.decode('utf-8') if isinstance(outp, bytes) else outp
-        print(f"{method.__qualname__}(*{eval(inp)}) -> {outp}")
+        for i, o in zip(inputs, outputs):
+            i = i.decode('utf-8') if isinstance(i, bytes) else i
+            o = o.decode('utf-8') if isinstance(o, bytes) else o
+            print(f"{method.__qualname__}(*{eval(i)}) -> {o}")
