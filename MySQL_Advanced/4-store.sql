@@ -1,3 +1,4 @@
+-- Does a thing (delimits)
 DELIMITER //
 
 CREATE TRIGGER trigger
