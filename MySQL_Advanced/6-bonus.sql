@@ -1,20 +1,22 @@
 -- Creates a procedure for extra credit
 DELIMITER//
 
-CREATE PROCEDURE AddBonus(IN user_id INT, IN project_name VARCHAR(255), IN score INT)
+CREATE PROCEDURE AddBonus(
+	in user_id int,
+	in project_name varchar(255),
+	in score float
+)
 BEGIN
 	DECLARE project_id INT;
 
-	-- Check for existing project
-	SELECT id INTO project_id FROM projects WHERE name = project_name;
-
-	-- Create project
-	IF project_id IS NULL THEN
+	-- Checks if project exists 
+	IF NOT EXISTS (SELECT * FROM projects WHERE name = project_name) 
+	THEN
 		INSERT INTO projects (name) VALUES (project_name);
-		SET project_id = LAST_INSERT_ID();
 	END IF;
 
-	-- New Correction
+	-- Creates and inserts correction
+	SELECT id INTO project_id FROM projects WHERE name = project_name;
 	INSERT INTO corrections (user_id, project_id, score) VALUES (user_id, project_id, score);
 END
 //
