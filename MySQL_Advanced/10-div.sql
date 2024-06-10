@@ -4,8 +4,6 @@ DELIMITER //
 CREATE FUNCTION SafeDiv(a INT, b INT)
 RETURNS FLOAT DETERMINISTIC
 BEGIN
-    DECLARE result INT;
-
 	--checks if second number is 0
     IF b = 0 THEN
 	RETURN 0;
