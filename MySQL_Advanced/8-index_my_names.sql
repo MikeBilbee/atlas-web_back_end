@@ -1,2 +1,2 @@
 -- Creates an index of first initials
-CREATE INDEX idx_name ON names (name(1));
+CREATE INDEX idx_name_first ON names (name(1));
