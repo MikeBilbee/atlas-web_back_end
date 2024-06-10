@@ -1,7 +1,8 @@
+-- Finds average score per user
 DELIMITER //
 
 CREATE PROCEDURE ComputeAverageScoreForUser(
-    IN user_id INT
+    IN user_id FLOAT
 )
 BEGIN
     DECLARE avg_score DECIMAL(10, 2);
