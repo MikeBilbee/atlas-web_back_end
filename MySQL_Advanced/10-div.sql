@@ -2,20 +2,18 @@
 DELIMITER //
 
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS INT
+RETURNS FLOAT DETERMINISTIC
 BEGIN
     DECLARE result INT;
 
 	--checks if second number is 0
     IF b = 0 THEN
-        SET result = 0;
-
+	RETURN 0;
 	--does division
     ELSE
-        SET result = a / b;
+        RETURN a / b;
     END IF;
 
-    RETURN result;
 END //
 
 DELIMITER ;
