@@ -1,7 +1,7 @@
--- Check if table exists
+-- Check if the table already exists
 CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     name VARCHAR(255),
-    country VARCHAR(2) NOT NULL DEFAULT 'US' CHECK (country IN ('US', 'CO', 'TN'))
+	country ENUM('US', 'CO', 'TN') NOT NULL DEFAULT 'US'
 );
