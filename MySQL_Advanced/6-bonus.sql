@@ -1,11 +1,7 @@
 -- Creates a procedure for extra credit
 DELIMITER//
 
-CREATE PROCEDURE AddBonus(
-	in user_id int,
-	in project_name varchar(255),
-	in score float
-)
+CREATE PROCEDURE AddBonus(IN user_id INT, IN project_name VARCHAR(255), IN score INT)
 BEGIN
 	DECLARE project_id INT;
 
