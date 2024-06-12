@@ -1,0 +1,2 @@
+//Deletes docs named "Holberton school" from collection "school"
+db.school.deleteMany({name: "Holberton school"});
