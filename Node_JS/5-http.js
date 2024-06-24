@@ -1,7 +1,7 @@
 // A small HTTP server using the http module
 
 const http = require('http');
-const Students = require('./3-read_file_async');
+const countStudentsStudents = require('./3-read_file_async');
 
 const app = http.createServer(async (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -11,7 +11,7 @@ const app = http.createServer(async (req, res) => {
   if (req.url === '/students') {
     res.write('This is the list of our students\n');
     try {
-      const students = await Students(process.argv[2]);
+      const students = await countStudents(process.argv[2]);
       res.end(`${students.join('\n')}`);
     } catch (error) {
       res.end(error.message);
