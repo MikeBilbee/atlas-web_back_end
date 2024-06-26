@@ -5,17 +5,17 @@ const assert = require('assert');
 
 
 describe('calculateNumber', () => {
-  describe('SUM', () => {
+  describe('type=SUM', () => {
     it('should return rounded sum for SUM', function() {
       assert.strictEqual(calculateNumber('SUM', 6.2, 11.8), 18);
     });
   });
-  describe('SUBTRACT', () => {
+  describe('type=SUBTRACT', () => {
     it('should return rounded difference for SUBTRACT', function() {
       assert.strictEqual(calculateNumber('SUBTRACT', 15.8, 6.2), 10);
     });
   });
-  describe('DIVIDE', () => {
+  describe('type=DIVIDE', () => {
     it('should return rounded division for DIVIDE', function() {
       assert.strictEqual(calculateNumber('DIVIDE', 9.3, 2.7), 3);
     });
