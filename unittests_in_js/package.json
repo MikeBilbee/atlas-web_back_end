@@ -1,0 +1,28 @@
+{
+	"name": "unittests_in_js",
+	"version": "1.0.0",
+	"description": "README",
+	"main": "index.js",
+	"scripts": {
+    "test": "mocha"
+    },
+	"author": "Mike Bilbee",
+	"license": "ISC",
+	"dependencies": {
+		"mkdirp": "^3.0.1"
+	},
+	"devDependencies": {
+    	"assert": "^2.0.0",
+    	"chai": "^4.3.7",
+    	"mocha": "^10.2.0",
+    	"sinon": "^15.2.0"
+    },
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MikeBilbee/atlas-web_back_end/tree/main/unittests_in_js"
+	},
+	"keywords": [
+		"mocha",
+		"javascript"
+	]
+}
