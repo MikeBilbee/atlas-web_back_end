@@ -1,12 +1,13 @@
 {
-	"name": "unittest_in_js",
+  "name": "unittest_in_js",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
     "check-lint": "lint [0-9]*.js",
-    "test": "mocha test.js",
+    "test": "mocha",
     "dev": "nodemon --exec babel-node --presets @babel/preset-env"
   },
   "author": "",
